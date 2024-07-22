@@ -1,4 +1,4 @@
-module github.com/adarshswaminath/simple-blockchain-in-golang
+module github.com/adarshswaminath/BlockSimulate
 
 go 1.21.1
 
