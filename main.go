@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
 	"time"
@@ -56,7 +57,11 @@ func main() {
 	go func() {
 		for {
 			previousBlock := blockchain[len(blockchain)-1]
-			newData := fmt.Sprintf("Block #%d", previousBlock.Index+1)
+			hasher := sha256.New()
+			hasher.Write([]byte(fmt.Sprintf("Block #%d", previousBlock.Index+1))) // write string bytes to hasher
+			result := hasher.Sum(nil)                                             // Get the hash as a byte slice
+			newData := hex.EncodeToString(result)                                 // Convert to hex string
+			// newData := fmt.Sprintf("Block #%d", previousBlock.Index+1)
 			newBlock := CreateBlock(previousBlock, newData)
 			blockchain = append(blockchain, newBlock)
 			time.Sleep(10 * time.Second)
