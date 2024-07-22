@@ -144,5 +144,28 @@ func main() {
 		return c.JSON(tx)
 	})
 
+	// Endpoint to get account details
+	app.Get("/account-details/:public_key", func(c *fiber.Ctx) error {
+		publicKeyHex := c.Params("public_key")
+		var wallet *Wallet
+		for _, w := range wallets {
+			if hex.EncodeToString(w.PublicKey.SerializeCompressed()) == publicKeyHex {
+				wallet = w
+				break
+			}
+		}
+		if wallet == nil {
+			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+				"error": "wallet not found",
+			})
+		}
+
+		// Return public key and balance, but not private key
+		return c.JSON(fiber.Map{
+			"public_key": hex.EncodeToString(wallet.PublicKey.SerializeCompressed()),
+			"balance":    wallet.Balance,
+		})
+	})
+
 	app.Listen(":3000")
 }
