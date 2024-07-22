@@ -3,9 +3,11 @@ package main
 import (
 	"crypto/sha256"
 	"encoding/hex"
+	"fmt"
 	"time"
 )
 
+// Block represents a single block in the blockchain
 type Block struct {
 	Index        int
 	Timestamp    string
@@ -14,24 +16,23 @@ type Block struct {
 	Hash         string
 }
 
-// CalculateHash returns the hash of the block's data
+// CalculateHash calculates the hash of a block
 func CalculateHash(block Block) string {
-	record := string(block.Index) + block.Timestamp + block.Data + block.PreviousHash
-	hash := sha256.New()
-	hash.Write([]byte(record))
-	hashed := hash.Sum(nil)
-	return hex.EncodeToString(hashed)
+	record := fmt.Sprintf("%d%s%s%s", block.Index, block.Timestamp, block.Data, block.PreviousHash)
+	h := sha256.New()
+	h.Write([]byte(record))
+	return hex.EncodeToString(h.Sum(nil))
 }
 
-// CreateBlock create a new block using the previous block's hash
-func CreateBlock(previousBlocl Block, data string) Block {
-	newBlock := Block{
-		Index:        previousBlocl.Index + 1,
-		Timestamp:    time.November.String(),
+// create new block
+func CreateBlock(previousBlock Block, data string) Block {
+	newIndex := previousBlock.Index + 1
+	timestamp := time.Now().String()
+	return Block{
+		Index:        newIndex,
+		Timestamp:    timestamp,
 		Data:         data,
-		PreviousHash: previousBlocl.Hash,
-		Hash:         "",
+		PreviousHash: previousBlock.Hash,
+		Hash:         CalculateHash(Block{Index: newIndex, Timestamp: timestamp, Data: data, PreviousHash: previousBlock.Hash}),
 	}
-	newBlock.Hash = CalculateHash(newBlock)
-	return newBlock
 }
