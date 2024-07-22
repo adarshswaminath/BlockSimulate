@@ -9,6 +9,9 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// Global variable to store transactions
+var transactions []Transaction
+
 type TransferRequest struct {
 	SenderPublicKey   string `json:"sender_public_key"`
 	SenderPrivateKey  string `json:"sender_private_key"`
@@ -56,7 +59,7 @@ func main() {
 			newData := fmt.Sprintf("Block #%d", previousBlock.Index+1)
 			newBlock := CreateBlock(previousBlock, newData)
 			blockchain = append(blockchain, newBlock)
-			time.Sleep(2 * time.Second)
+			time.Sleep(10 * time.Second)
 		}
 	}()
 
@@ -71,6 +74,22 @@ func main() {
 
 	app.Get("/wallets", func(c *fiber.Ctx) error {
 		return c.JSON(wallets)
+	})
+
+	// Endpoint to create a new wallet
+	app.Post("/create-wallet", func(c *fiber.Ctx) error {
+		wallet, err := CreateWallet()
+		if err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "failed to create wallet: " + err.Error(),
+			})
+		}
+		wallets = append(wallets, wallet)
+		return c.JSON(fiber.Map{
+			"public_key":  hex.EncodeToString(wallet.PublicKey.SerializeCompressed()),
+			"private_key": hex.EncodeToString(wallet.PrivateKey.Serialize()),
+			"balance":     wallet.Balance,
+		})
 	})
 
 	// Endpoint to transfer funds
@@ -141,6 +160,9 @@ func main() {
 			})
 		}
 
+		// Store the transaction
+		transactions = append(transactions, tx)
+
 		return c.JSON(tx)
 	})
 
@@ -167,24 +189,9 @@ func main() {
 		})
 	})
 
-	// Endpoint to create a new wallet
-	app.Post("/create-wallet", func(c *fiber.Ctx) error {
-		wallet, err := CreateWallet()
-		if err != nil {
-			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
-				"error": "failed to create wallet: " + err.Error(),
-			})
-		}
-
-		// Add the new wallet to the list of wallets
-		wallets = append(wallets, wallet)
-
-		// Return the new wallet details
-		return c.JSON(fiber.Map{
-			"public_key":  hex.EncodeToString(wallet.PublicKey.SerializeCompressed()),
-			"private_key": hex.EncodeToString(wallet.PrivateKey.Serialize()),
-			"balance":     wallet.Balance,
-		})
+	// Endpoint to get all transactions
+	app.Get("/transactions", func(c *fiber.Ctx) error {
+		return c.JSON(transactions)
 	})
 
 	app.Listen(":3000")
