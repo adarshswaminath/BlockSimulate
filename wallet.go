@@ -35,6 +35,19 @@ func InitializeWallets(numWallets int) []*Wallet {
 	return wallets
 }
 
+// CreateWallet creates a new wallet with a random key and initial balance
+func CreateWallet() (*Wallet, error) {
+	privateKey, err := secp256k1.GeneratePrivateKey()
+	if err != nil {
+		return nil, fmt.Errorf("error generating private key: %w", err)
+	}
+	return &Wallet{
+		PrivateKey: privateKey,
+		PublicKey:  privateKey.PubKey(),
+		Balance:    100, // Initialize with 100 coins
+	}, nil
+}
+
 // CalculateTransactionHash calculates the hash of the transaction
 func CalculateTransactionHash(transaction Transaction) [32]byte {
 	record := transaction.Sender + transaction.Receiver + fmt.Sprint(transaction.Amount) + transaction.Timestamp
@@ -69,7 +82,7 @@ func VerifyTransaction(publicKey *secp256k1.PublicKey, transaction Transaction) 
 	return sig.Verify(hash[:], publicKey), nil
 }
 
-// TransferRequest processes the transfer between sender and receiver
+// ProcessTransfer processes the transfer between sender and receiver
 func ProcessTransfer(sender, receiver *Wallet, amount int) error {
 	if sender.Balance < amount {
 		return errors.New("insufficient funds")

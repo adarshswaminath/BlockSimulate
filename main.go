@@ -167,5 +167,25 @@ func main() {
 		})
 	})
 
+	// Endpoint to create a new wallet
+	app.Post("/create-wallet", func(c *fiber.Ctx) error {
+		wallet, err := CreateWallet()
+		if err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "failed to create wallet: " + err.Error(),
+			})
+		}
+
+		// Add the new wallet to the list of wallets
+		wallets = append(wallets, wallet)
+
+		// Return the new wallet details
+		return c.JSON(fiber.Map{
+			"public_key":  hex.EncodeToString(wallet.PublicKey.SerializeCompressed()),
+			"private_key": hex.EncodeToString(wallet.PrivateKey.Serialize()),
+			"balance":     wallet.Balance,
+		})
+	})
+
 	app.Listen(":3000")
 }

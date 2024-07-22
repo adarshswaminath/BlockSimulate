@@ -24,7 +24,7 @@ func CalculateHash(block Block) string {
 	return hex.EncodeToString(h.Sum(nil))
 }
 
-// create new block
+// CreateBlock creates a new block in the blockchain
 func CreateBlock(previousBlock Block, data string) Block {
 	newIndex := previousBlock.Index + 1
 	timestamp := time.Now().String()
