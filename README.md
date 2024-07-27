@@ -13,7 +13,7 @@ BlockSimulate is a simple blockchain simulator written in Go. It creates a local
 
 ### Prerequisites
 
-* Go 1.16 or higher: https://golang.org/dl/
+* Go 1.21 or higher: https://golang.org/dl/
 
 ### Installation
 
