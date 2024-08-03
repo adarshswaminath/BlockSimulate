@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { BACKEND_DOMAIN } from "../../constants"
+import { Link } from "react-router-dom"
 
 export default function LatestBlocks() {
     interface Block {
@@ -52,7 +53,9 @@ export default function LatestBlocks() {
                         </div>
                     ))}
                     <div className="mt-3 flex justify-center">
-                    <button className="bg-white btn w-full text-black hover:text-white">See All Transactions</button>
+                   <Link to={"/transactions"} className="w-full">
+                   <button className="bg-white btn w-full text-black hover:text-white">See All Transactions</button>
+                   </Link>
                     </div>
                 </div>
             </div>
