@@ -4,6 +4,7 @@ import Navbar from "./Components/Navbar";
 import Home from "./Pages/Home/Home";
 import Wallet from "./Pages/Wallet/Wallet";
 import Transactions from "./Pages/Transactions/Transactions";
+import WalletDetails from "./Pages/WalletDetails/WalletDetails";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
 
           <Route path="/" element={<Home />} />
           <Route path="/wallet" element={<Wallet />} />
+          <Route path="/addresses/:address" element={<WalletDetails />} />
           <Route path="/transactions" element={<Transactions/>}/>
         </Routes>
       </BrowserRouter>
