@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { BACKEND_DOMAIN } from "../../constants"
 import { FaCopy } from "react-icons/fa"
+import { useGlobalState } from "../../Context/GlobalStateContext";
 
 interface WalletModalProps {
     setShowModal: (show: boolean) => void;
@@ -10,6 +11,7 @@ interface WalletModalProps {
 const WalletModal: React.FC<WalletModalProps> = ({ setShowModal }) => {
     const [privateKey, setPrivateKey] = useState<string>('')
     const [publicKey, setPublicKey] = useState<string>('')
+    const {setIsEnabled} = useGlobalState()
 
     useEffect(() => {
         axios.post(`${BACKEND_DOMAIN}/create-wallet`)
@@ -28,6 +30,7 @@ const WalletModal: React.FC<WalletModalProps> = ({ setShowModal }) => {
     const handleSave = () => {
         localStorage.setItem("privateKey", privateKey)
         localStorage.setItem('publicKey', publicKey)
+        setIsEnabled((prev) => !prev)
         setShowModal(false)
     }
 
