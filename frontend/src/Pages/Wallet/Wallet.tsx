@@ -17,7 +17,7 @@ export default function Wallet() {
   return (
     <div className="flex flex-col items-center py-16">
       <h3 className="text-white text-2xl uppercase tracking-wider">crypto wallet</h3>
-      {(publicKey && privateKey) ? <UserWallet publicKey={publicKey}/> : <CreateWallet />}
+      {(publicKey && privateKey) ? <UserWallet publicKey={publicKey} privateKey={privateKey}/> : <CreateWallet />}
     </div>
   )
 }
