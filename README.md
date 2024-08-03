@@ -1,4 +1,5 @@
 # BlockSimulate
+![Gemini_Generated_Image_84eq9k84eq9k84eq](https://github.com/user-attachments/assets/05212040-78a7-4cd1-917e-044180f02f51)
 
 BlockSimulate is a simple blockchain simulator written in Go. It creates a local blockchain with features for wallet management, transaction signing, and blockchain operations.
 
@@ -53,6 +54,20 @@ go build -o blocksimulate
 ```sh
 ./blocksimulate
 ```
+**For frontend**
+
+4.After running the Go application, open a new terminal:
+```sh
+cd frontend
+```
+5.Install dependencies
+```sh
+npm install
+```
+6.Run the frontend
+```sh
+npm run dev
+```
 
 
 The application will start a web server on http://localhost:3000.
@@ -73,5 +88,8 @@ Request body:
   "amount": 10
 }
 ```
-- GET `/account-details/`:public_key: Retrieve account details by public key.
+- GET `/account-details/:public_key`: Retrieve account details by public key.
 - GET `/transactions`: Retrieve all transactions.
+
+## Screenshots
+Screenshots of the frontend are available in the `/screenshots` folder.
