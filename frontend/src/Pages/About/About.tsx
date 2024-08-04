@@ -1,14 +1,13 @@
 import React from 'react';
-import { FaWallet, FaExchangeAlt, FaCubes, FaLock, FaInfoCircle, FaChartLine } from 'react-icons/fa';
+import { FaWallet, FaExchangeAlt, FaCubes, FaLock, FaInfoCircle, FaChartLine, FaUserFriends, FaGlobe } from 'react-icons/fa';
 import { SiReact, SiTailwindcss, SiGo } from 'react-icons/si';
 import ElasticTitle from '../../Components/ElasticTitle';
 
 const About: React.FC = () => {
   return (
-    <div className=" text-white min-h-screen">
+    <div className="text-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <ElasticTitle title='BlockSimulate &nbsp; Documentation'/>
-
+        <ElasticTitle title='BlockSimulate &nbsp; Documentation'/>
         
         <div className="bg-gray-900 rounded-xl shadow-2xl p-8 mb-12 mt-12">
           <h2 className="text-3xl font-bold mb-4">About BlockSimulate</h2>
@@ -90,6 +89,40 @@ const About: React.FC = () => {
                 <li key={index} className="text-lg">{step}</li>
               ))}
             </ol>
+          </div>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold mb-6">How to Use BlockSimulate</h2>
+          <div className="bg-gray-900 rounded-xl p-8">
+            <p className="mb-6 text-lg">
+              Experience the blockchain simulation easily on your own or with friends:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-gray-800 rounded-lg p-6">
+                <h3 className="text-xl font-semibold mb-4 flex items-center">
+                  <FaUserFriends className="mr-2 text-purple-400" /> Share with Friends
+                </h3>
+                <ol className="list-decimal list-inside space-y-2">
+                  <li>Share the project URL: <a href='https://block-simulate.vercel.app/' target='_blank' className="text-blue-400">https://block-simulate.vercel.app/</a></li>
+                  <li>Each friend creates their own wallet</li>
+                  <li>Transfer and receive coins between wallets</li>
+                  <li>Explore the blockchain together</li>
+                </ol>
+              </div>
+              <div className="bg-gray-800 rounded-lg p-6">
+                <h3 className="text-xl font-semibold mb-4 flex items-center">
+                  <FaGlobe className="mr-2 text-green-400" /> Solo Exploration
+                </h3>
+                <ol className="list-decimal list-inside space-y-2">
+                  <li>Open the project in your main browser</li>
+                  <li>Open an incognito window or another browser</li>
+                  <li>Create wallets in both windows</li>
+                  <li>Simulate transactions between your wallets</li>
+                  <li>Observe how the blockchain updates</li>
+                </ol>
+              </div>
+            </div>
           </div>
         </section>
 
