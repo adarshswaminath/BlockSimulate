@@ -44,7 +44,7 @@ const TextSpan: React.FC<TextSpanProps> = ({ children }) => {
       onMouseOver={() => {
         rubberBand();
       }}
-      className="inline-block text-3xl md:text-4xl lg:text-6xl font-bold uppercase text-white whitespace-nowrap"
+      className="hover:text-zinc-400 inline-block text-3xl md:text-4xl lg:text-6xl font-bold uppercase text-white whitespace-nowrap"
     >
       {children}
     </motion.span>
