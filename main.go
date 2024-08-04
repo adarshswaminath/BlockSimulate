@@ -4,6 +4,8 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 	"fmt"
+	"log"
+	"os"
 	"time"
 
 	"github.com/decred/dcrd/dcrec/secp256k1/v4"
@@ -205,5 +207,11 @@ func main() {
 		return c.JSON(transactions)
 	})
 
-	app.Listen(":3000")
+	// Port setup for railway deployement
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+
+	log.Fatal(app.Listen("0.0.0.0:" + port))
 }
