@@ -29,7 +29,7 @@ func InitializeWallets(numWallets int) []*Wallet {
 		wallets = append(wallets, &Wallet{
 			PrivateKey: privateKey,
 			PublicKey:  privateKey.PubKey(),
-			Balance:    100, // Initialize with 100 coins
+			Balance:    1000, // Initialize with 1000 coins
 		})
 	}
 	return wallets
@@ -44,7 +44,7 @@ func CreateWallet() (*Wallet, error) {
 	return &Wallet{
 		PrivateKey: privateKey,
 		PublicKey:  privateKey.PubKey(),
-		Balance:    100, // Initialize with 100 coins
+		Balance:    1000, // Initialize with 1000 coins
 	}, nil
 }
 
