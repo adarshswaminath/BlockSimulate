@@ -1,1 +1,1 @@
-export const BACKEND_DOMAIN = "blocksimulate-production.up.railway.app"
+export const BACKEND_DOMAIN = "https://blocksimulate-production.up.railway.app"
