@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUsertransactions } from "../../utils";
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import ElasticTitle from "../../Components/ElasticTitle";
 
 interface Transaction {
   Sender: string;
@@ -32,7 +33,7 @@ export default function Transactions() {
 
   const filterTransactions = () => {
     const query = searchQuery.toLowerCase();
-    const filtered = transactions.filter(transaction => {
+    const filtered = transactions?.filter(transaction => {
       switch (searchCriteria) {
         case 'date':
           return transaction.Timestamp.toLowerCase().includes(query);
@@ -51,10 +52,10 @@ export default function Transactions() {
 
   return (
     <div className="p-6">
-      <h3 className="text-3xl font-bold text-white mb-6">All Transactions</h3>
+      <div className="flex justify-center mt-4 mb-6">
+        <ElasticTitle title="All &nbsp; Transactions"/>
+      </div>
       <div className="bg-gray-900 rounded-2xl shadow-xl p-8">
-        <h2 className="text-2xl font-bold text-gray-200 mb-6">Recent Transactions</h2>
-
         {/* Search Bar */}
         <div className="mb-6 flex space-x-4">
           <input
@@ -76,9 +77,9 @@ export default function Transactions() {
           </select>
         </div>
 
-        {filteredTransactions.length > 0 ? (
+        {filteredTransactions?.length > 0 ? (
           <ul className="space-y-4">
-            {filteredTransactions.map((transaction) => (
+            {filteredTransactions?.map((transaction) => (
               <li
                 key={transaction.Timestamp}
                 className="bg-gray-800 p-4 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between transition duration-300 ease-in-out transform hover:scale-105"
