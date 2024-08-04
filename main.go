@@ -58,7 +58,8 @@ func main() {
 	app := fiber.New()
 	// Initialize default cors setup
 	app.Use(cors.New(cors.Config{
-		AllowOrigins: "http://localhost:5173/",
+		AllowOrigins: "https://block-simulate.vercel.app/",
+		// AllowOrigins: "http://localhost:5173/",
 		AllowHeaders: "Origin, Content-Type, Accept",
 	}))
 
