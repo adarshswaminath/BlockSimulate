@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaWallet, FaExchangeAlt, FaCubes, FaLock, FaInfoCircle, FaCog, FaChartLine } from 'react-icons/fa';
+import { FaWallet, FaExchangeAlt, FaCubes, FaLock, FaInfoCircle, FaChartLine } from 'react-icons/fa';
 import { SiReact, SiTailwindcss, SiGo } from 'react-icons/si';
 import ElasticTitle from '../../Components/ElasticTitle';
 
