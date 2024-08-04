@@ -18,7 +18,7 @@ const About: React.FC = () => {
 
         <section className="mb-12">
           <h2 className="text-3xl font-bold mb-6">Key Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             {[
               { icon: <FaWallet />, title: "User-friendly interface", description: "Intuitive interface for easy blockchain interaction" },
               { icon: <FaWallet />, title: "Wallet creation", description: "Simple virtual wallet creation process" },
